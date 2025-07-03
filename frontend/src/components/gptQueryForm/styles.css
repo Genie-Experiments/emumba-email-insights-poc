@@ -1,0 +1,15 @@
+.ant-form-item {
+  margin-bottom: 12px;
+}
+
+.ant-tag {
+  font-size: 14px;
+  text-wrap: wrap;
+  margin: 2px 0;
+}
+
+.gptQueryForm {
+  max-width: 600px;
+  width: 100%;
+  margin-top: 2vw;
+}

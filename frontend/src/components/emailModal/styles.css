@@ -1,0 +1,83 @@
+.email-modal {
+  max-height: 729px;
+  min-width: 80vw;
+  height: fit-content;
+}
+
+.email-modal-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(214, 221, 241, 1);
+}
+
+.email-modal-content .email-to-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.email-modal-content .to-email-tag,
+.email-modal-content .to-email-more-tag {
+  background-color: rgba(237, 239, 245, 1);
+  border: 1px solid rgba(214, 221, 241, 1);
+  border-radius: 400px;
+  padding: 2px 10px;
+  color: rgba(72, 82, 115, 1);
+  cursor: default;
+}
+
+.email-modal-content .email-keys {
+  font-size: 14px;
+  color: rgba(42, 42, 42, 1);
+}
+
+.email-modal-content .subject {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.email-modal-content .remaining-email {
+  font-size: 12px;
+}
+
+.email-modal-content .email-date {
+  font-size: 14px;
+  color: rgba(42, 42, 42, 1);
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.email-modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.email-modal-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.email-modal-content .email-body-text-container {
+  margin-top: 16px;
+  background-color: rgba(245, 246, 249, 1);
+  padding: 12px;
+  border-radius: 8px;
+  color: rgba(42, 42, 42, 1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.email-modal-content .email-body-text-container ul,
+.email-modal-content .email-body-text-container ol {
+  margin-left: 16px;
+}
+
+.email-modal-content .email-body-text-container mark {
+  background-color: #fdbd98;
+}

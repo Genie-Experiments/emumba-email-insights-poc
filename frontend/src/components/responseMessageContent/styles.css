@@ -1,0 +1,46 @@
+.response-message-content {
+  width: 100%;
+  max-height: 60vh;
+  height: fit-content;
+  margin: auto;
+  padding: 4px 20px;
+  border-radius: 8px;
+  background-color: rgba(255, 251, 250, 1);
+  border: 1px dashed rgba(266, 68, 2, 0.7);
+  overflow-y: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.response-message-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.response-message-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.response-message-content .response-content {
+  padding: 10px 0;
+}
+
+.response-message-content .response-content p {
+  margin: 8px;
+  font-size: 14px;
+}
+
+.response-message-content .response-content p strong {
+  /* line-height: 2; */
+  font-size: 18px;
+}
+
+.response-message-content .response-content ul,
+.response-message-content .response-content ol {
+  margin-left: 24px;
+}
+
+.response-message-content .response-content ul li {
+  margin: 6px 0;
+  font-size: 15px;
+}

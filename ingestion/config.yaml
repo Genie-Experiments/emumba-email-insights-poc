@@ -1,0 +1,6 @@
+source:
+  name: "ms_outlook"
+  client_id: "your-client-id"
+  tenant_id: "your-tenant-id"
+  client_secret: "your-client-secret"
+  scope: ["your-scope-or-default-scope"]

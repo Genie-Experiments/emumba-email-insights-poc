@@ -1,0 +1,55 @@
+.homepage {
+  background-color: rgb(245, 245, 245);
+}
+
+.homepage .container {
+  padding: 20px 40px 10px;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+.homepage .container h1 {
+  color: rgba(226, 68, 2, 1);
+}
+
+.homepage .container p {
+  color: rgb(42, 42, 42);
+  font-size: 14px;
+}
+
+.homepage .form-and-response {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  gap: 30px;
+}
+
+.form-and-response .leftside {
+  min-width: 700px;
+  max-width: 700px;
+  transition: all 0.3s ease;
+}
+
+.form-and-response .leftside.collapsed {
+  min-width: 250px;
+  max-width: 250px;
+  overflow: hidden;
+}
+
+.collapse-button {
+  margin-bottom: 10px;
+}
+
+.rightside {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.homepage .rightside::-webkit-scrollbar {
+  display: none;
+}
+
+.homepage .rightside {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

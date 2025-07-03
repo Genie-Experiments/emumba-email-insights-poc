@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: ankane/pgvector
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+      POSTGRES_MAX_CONNECTIONS: 200
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"      # Main LocalStack gateway
+      - "4571:4571"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/var/lib/localstack/data
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - PERSISTANCE=1
+    volumes:
+      - ./localstack_data:/var/lib/localstack/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - app-network
+
+  emumba-rag-service:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: emumba-rag-service
+    environment:
+      - DB_USER=test
+      - DB_PASSWORD=test
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=test
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_S3_BUCKET=emumba-email-insights
+      - AWS_S3_ENDPOINT_URL=http://localstack:4566
+      - OPENAI_API_BASE=https://api.openai.com/v1/
+      - LLM_MODEL=gpt-3.5-turbo
+      - API_KEY=OPENAI_API_KEY
+      - EMBEDDING_URL=https://api.openai.com/v1/embeddings
+      - EMBEDDING_MODEL=text-embedding-3-small
+      - EMBEDDING_DIM=1536
+      - SERVER_PORT=5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+      - localstack
+    networks:
+      - app-network
+
+  emumba-email-insights:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: emumba-email-insights
+    environment:
+      - REACT_APP_API_URL=emumba-rag-service:5000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - emumba-rag-service
+    networks:
+      - app-network
+
+  emumba-outlook-ingestion:
+    build:
+      context: ingestion
+      dockerfile: Dockerfile
+    container_name: emumba-outlook-ingestion
+    environment:
+      - OPENAI_API_BASE=https://api.openai.com/v1/
+      - LLM_MODEL=gpt-3.5-turbo
+      - API_KEY=OPENAI_API_KEY
+      - EMBEDDING_URL=https://api.openai.com/v1/embeddings
+      - EMBEDDING_MODEL=text-embedding-3-small
+      - EMBEDDING_DIM=1536
+      - DB_USER=test
+      - DB_PASSWORD=test
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=test
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_S3_BUCKET=emumba-email-insights
+      - AWS_S3_ENDPOINT_URL=http://localstack:4566
+    depends_on:
+      - localstack
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+  localstack_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+# TODO: have a common .env file with all env vars

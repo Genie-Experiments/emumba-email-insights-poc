@@ -1,0 +1,50 @@
+.attachment-modal {
+  min-width: 845px;
+  max-height: 729px;
+  width: 100%;
+  height: fit-content;
+}
+
+.attachment-modal-content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.attachment-modal-content .attachment-keys {
+  font-size: 14px;
+  color: rgba(42, 42, 42, 1);
+}
+
+.attachment-modal-content .subject {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.attachment-modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.attachment-modal-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.attachment-modal-content .attachment-body-text-container {
+  margin-top: 16px;
+  background-color: rgba(245, 246, 249, 1);
+  padding: 12px;
+  border-radius: 8px;
+  color: rgba(42, 42, 42, 1);
+}
+
+.attachment-modal-content .attachment-download-link {
+  margin-top: 12px;
+  display: flex;
+  gap: 6px;
+}
